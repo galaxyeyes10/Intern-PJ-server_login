@@ -40,7 +40,7 @@ async def search_user(request: Request, user_id: str = Form(...), password: str 
     request.session["user_id"] = user.user_id
     request.session["username"] = user.username
 
-    return {"message": "Login successful", "username": user.username}
+    return {"user_id": user.user_id}
 
 # 로그아웃 처리
 @login.post("/logout/")
@@ -56,7 +56,7 @@ async def check_login(request: Request):
     if "user_id" not in request.session:
         return False
     
-    return {"message": f"Logged in as {request.session['username']}"}
+    return {"user_id": f"{request.session['user_id']}"}
 
 if __name__ == "__login__":
     port = int(os.environ.get("PORT", 8000))
