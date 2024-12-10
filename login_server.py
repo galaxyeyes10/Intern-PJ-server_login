@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Form, Request
+from fastapi import FastAPI, Depends, Body, Request
 from sqlalchemy.orm import Session
 from model import UserTable
 from db import session
@@ -28,7 +28,7 @@ def get_db():
 
 # 로그인 처리
 @login.post("/login/")
-async def search_user(request: Request, user_id: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
+async def search_user(request: Request, user_id: str = Body(...), password: str = Body(...), db: Session = Depends(get_db)):
     # 사용자가 입력한 user_id로 해당 유저 정보 조회
     user = db.query(UserTable).filter(UserTable.user_id == user_id).first()
 
