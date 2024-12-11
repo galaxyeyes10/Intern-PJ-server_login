@@ -76,7 +76,7 @@ async def check_login(request: Request):
     # Redis에서 세션 데이터 가져오기
     session_data = await redis.get(session_id)
     if not session_data:
-        raise HTTPException(status_code=401, detail="Session expired or invalid")
+        raise {"success": False}
 
     return {"success": True, "session_id": session_id, "session_data": session_data}
 
